@@ -1,40 +1,34 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: "Dashboard-Portfolio",
-  description: "Build Dashboard-Portfolio",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="flex w-full pr-5 pl-5 pt-5">
-          <Sidebar />
-          <Header />
-        </div>
+      <body>
+        <div className="flex h-screen w-full">
+          <div className=" pl-5 pt-5">
+            <Sidebar />
+          </div>
 
-        {children}
+          <div className="flex flex-col flex-1">
+            <div className="pt-5 pr-5">
+              <Header />
+            </div>
+
+            <main className="flex-1 px-5 pb-5 overflow-y-auto">{children}</main>
+          </div>
+        </div>
       </body>
     </html>
   );
